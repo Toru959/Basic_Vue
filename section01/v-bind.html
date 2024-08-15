@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <style>
+        .active{
+            border:1px solid red;
+        }
+        .text-danger{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- リアルDOM -->
+    <div style="color: blue; font-size:20px">styleテスト</div>
+    <br>
+    <div class="active text-danger">classテスト</div><br>
+
+    <!-- 仮想DOM -->
+   <div id="app">
+        <div style="" class=""></div>
+        <div v-bind:style="{ fontSize:fontSize }" class="">styleテスト</div><br>
+        <div v-bind:class="{ active:isActive}">classテスト</div><br>
+   </div>
+
+   <script>
+    let app = new Vue({
+        el: '#app',
+        data: function(){
+            return {
+                // font-size: 20px ケバブケースはオブジェクト内で設定できない
+                fontSize: '20px', //キャメルケースで書く
+                isActive: true, // classをつけたり消したりできる
+            }
+        }
+    })
+   </script>
+</body>
+</html>

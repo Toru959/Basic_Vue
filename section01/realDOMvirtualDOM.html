@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+    <!-- リアルDOM  タグを見るだけではJSがつながっているかがわからない-->
+    <!-- <a id="google_link">googleへのリンク</a> -->
+
+    <!-- 仮想DOM -->
+    <div id="add">
+        {{ message }}<br>
+        <!-- <a v-bind:href="google">googleへのリンク</a> -->
+        <a :href="google">googleへのリンク</a><br>
+
+        <!-- オブジェクト.キー -->
+        <a :href="book.url">{{ book.title }}</a><br>
+
+        <!-- 下に行くに連れて簡単な書き方になる -->
+        <input :name="formInput.name" :value="formInput.value" :placeholder="formInput.placeholder">
+        <br>
+        <input v-bind="({ name: formInput.name, value: formInput.value, placeholder: formInput.placeholder })">
+        <br>         
+        <input v-bind="formInput">
+        <br>
+    </div>
+
+    <script>
+        // 直接DOM操作
+        // idを指定しているのでidが変更された場合コードを変更する必要ある。
+        // const googleLink = document.getElementById('google_link');
+        // googleLink.href="https://google.com";
+
+        // Vueクラス→インスタン化
+        let app = new Vue({
+            el: '#add',
+            data: function(){ // dataの箇所は初期設定と思ってOK
+                return {
+                    message: 'Hello', // キー(key):値(value)
+                    google: 'https://google.com',
+                    // オブジェクトでもOK
+                    book: {
+                        title: '本のタイトル',
+                        url: 'https://test.com'
+                    },
+                    formInput: {
+                        name: 'your_name',
+                        value: '',
+                        placeholder: '名前を入力してください'
+                    },
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
+   
+   
+   
+   
+   
+   

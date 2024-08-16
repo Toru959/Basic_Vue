@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+   <div id="app">
+        <div v-if="isDisplay">idで表示</div>
+
+        <div v-if="signal === 'red'">赤</div>
+        <div v-else-if="signal === 'yellow'">黄</div>
+        <div v-else-if="signal === 'blue'">青</div>
+        <div v-else>赤青黄ではありません</div>
+   </div>
+   
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: function(){
+                return {
+                    isDisplay: true,
+                    signal: 'red',
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+   <div id="app">
+        <!-- 配列 -->
+        <div v-for="member in members">
+            {{ member }}
+        </div><br>
+        <!-- 配列（インデックス番号） -->
+        <div v-for="(member, index) in members">
+            {{ index }}
+        </div><br>
+        <div v-for="(member, index) in members">
+            {{ index }} : {{ member }}
+        </div><br>
+
+        <!-- オブジェクト -->
+        <div v-for="value in book">
+            {{ value }}
+        </div><br>
+        <div v-for="(value, key) in book">
+            {{ key }} : {{ value }}
+        </div><br>
+        <div v-for="(value, key, index) in book">
+            {{ index }} : {{ key }} : {{ value }}
+        </div><br>
+
+        <!-- 複数のオブジェクト -->
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>著者</th>
+                <th>URL</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="book in books" :key="book.id">
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.url }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: function(){
+                return {
+                    members: [
+                        '本田',
+                        '香川',
+                        '長友'
+                    ],
+                    book: {
+                        title: 'タイトル',
+                        author: '著者名',
+                        url: 'https://google.com'
+                    },
+                    books: [
+                        {
+                            id: 1,
+                            title: 'タイトル1',
+                            author: '著者名1',
+                            url: 'https://google.com'
+                        },
+                        {
+                            id: 2,
+                            title: 'タイトル2',
+                            author: '著者名2',
+                            url: 'https://google.com'
+                        },
+                        {
+                            id: 3,
+                            title: 'タイトル3',
+                            author: '著者名3',
+                            url: 'https://google.com'
+                        },                                         
+                    ]
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

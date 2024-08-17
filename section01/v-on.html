@@ -8,11 +8,19 @@
 </head>
 <body>
     <button id="clickEvent" onclick="btnClicked()">クリックしてね</button>
+
+    <!-- Ajax -->
+    <form>
+        <button id="prevent" type="submit">JS送信</button>
+    </form>
+
+
    <div id="app">
         <button v-on:click="btnClicked">クリックしてね</button>
         <button @click="btnClickedEvent">イベントクリックしてね</button>
         <button @click="btnClickedArgs(1)">引数クリックしてね</button>
         <button @click="btnClickedArgsEvent(1, $event)">引数イベントクリックしてね</button>
+        <button @click.stop.prevent="prevent">Vue送信</button>
    </div>
 
    <script>
@@ -38,6 +46,10 @@
 
                 btnClickedArgsEvent(input, e){
                     console.log(input, e);
+                },
+
+                prevent(e){
+                    console.log(e)
                 }
             }
 
@@ -51,6 +63,13 @@
         clickEvent.addEventListener('click', (e) => {
             console.log(e);
         });
+
+        let prevent = document.getElementById('prevent');
+        prevent.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log(e);
+        });
+
    </script>
 </body>
 </html>

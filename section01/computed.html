@@ -30,13 +30,30 @@
                 }
             },
             computed: {
-                totalPrice(){
-                    console.log('computedです')
-                    return this.number * this.price
+                // totalPrice(){
+                //     console.log('computedです')
+                //     return this.number * this.price
+                // }
+                totalPrice: (app) => {
+                    app.number * app.number
                 }
             },
             watch: {}
         })
+
+        console.log(this); // windowオブジェクト
+
+        const obj = {
+            test: function(){
+                console.log(this); // オブジェクトの中だとそのオブジェクトを参照
+            }
+        }
+
+        const objArrow = {
+            test: () => {
+                console.log(this); // windowオブジェクト
+            }
+        }
    </script> 
 </body>
 </html>

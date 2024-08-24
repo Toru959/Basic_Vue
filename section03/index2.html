@@ -5,18 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display:none;
+        }
+        .error{
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <form>
+    <div id="app" v-cloak>
+        <p v-if="errors.length">
+            <ul>
+                <li class="error" v-for="error in errors">
+                    {{ error }}
+                </li>
+            </ul>
+        </p>
+        <form v-on:submit.prevent="validate">
             氏名
-            <input type="text" v-model="contact.yourName">
+            <input type="text" v-model="yourName"> <!-- computedで監視している値 -->
             <br>
+            <p v-bind:class="{error: hasError.youName}">{{ contact.yourName.length }} / 20</p>
+            <p v-show="hasError.yourName" class="error">氏名は20文字以内で入力してください</p>
             電話番号
-            <input type="tel" v-model="contact.tal">
+            <input type="tel" v-model.number="contact.tal">
             <br>
             メールアドレス
-            <input type="email" v-model.lazy="contact.email">
+            <input type="email" v-model.lazy.trim="contact.email">
             <br>
             性別
             <input type="radio" value="male" v-model="contact.gender">男性
@@ -60,6 +77,46 @@
                         message: '',
                         attracts: [],
                         caution: false
+                    },
+                    errors: [],
+                    hasError:{
+                        yourName: false
+                    }
+                }
+            },
+            methods: {
+                validate(){
+                    this.errors = []
+                    if(!this.contact.yourName){
+                        this.errors.push('氏名は必須です');
+                    } else if(this.contact.yourName.length > 20){
+                        this.errors.push('氏名は20文字以内で入力してください');
+                    }
+                    if(!this.contact.gender){
+                        this.errors.push('性別を選択してください');
+                    }
+                    if(!this.contact.caution){
+                        this.errors.push('注意事項にチェックを入れてください');
+                    }
+                    if(!this.errors.length){
+                        console.log('送信可能です');
+                    }
+                }
+            },
+            computed: {
+                yourName:{
+                    get(){
+                        return this.contact.yourName
+                    },
+                    set(value){
+                        // console.log(value);
+                        if(value.length <= 20){
+                            this.hasError.yourName = false
+                        } else {
+                            this.hasError.yourName = true
+                        }
+
+                        this.contact.yourName = value
                     }
                 }
             }

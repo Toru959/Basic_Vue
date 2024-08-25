@@ -21,7 +21,7 @@
 <body>
    <div id="app" class="parent">
         <my-component title="テスト" class="child"></my-component>
-        <my-component class="child"></my-component>
+        <my-component  v-bind:title="parentTitle" class="child"></my-component>
         <my-component disabled class="child"></my-component>
    </div>
    <script>
@@ -56,7 +56,7 @@
             },
             data: function(){
                 return {
-
+                    parentTitle: '親側のタイトル'
                 }
             }
         })

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+   <div id="app">
+        <button v-on:click="getDogImage">ワンちゃん</button><br>
+        <img v-bind:src="dogImage">
+   </div> 
+   <script>
+        const url = 'https://dog.ceo/api/breeds/image/random'
+        const options = {
+            method: 'get'
+        }
+
+        let app = new Vue({
+            el: '#app',
+            data: function(){
+                return {
+                    dogImage: ''
+                }
+            },
+            methods: {
+                async getDogImage(){ // 非同期通信
+                    const response = await fetch(url, options)
+                    .then( response => response.json());
+
+                    // console.log(response.message);
+                    this.dogImage = response.message;
+                }
+            },
+            created(){
+                this.getDogImage(); // ページを開いた時に関数を走らせる
+            }
+        })
+   </script>
+</body>
+</html>

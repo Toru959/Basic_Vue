@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
+        // lodashのdebounceを設定しないと画面のサイズが変更されるたびにサーバと通信して処理が重くなる
+        // window.addEventListener('resize', () => {
+        //     console.log('リサイズしたよ')
+        // })
+
+        // debounceを設定することで、サーバの処理を軽くできる
+        // window.addEventListener('resize', _.debounce(() => {
+        //     console.log('debounceでリサイズ')
+        // }, 3000))
+
+        // throttleは変更が終わってから指定時間が過ぎないと通信をしない
+        window.addEventListener('resize', _.throttle(() => {
+            console.log('throttleでリサイズ')
+        }, 3000))
+        
+   </script>
+</body>
+</html>

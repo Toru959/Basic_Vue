@@ -5,13 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 </head>
 <body>
    <div id="app">
         <button v-on:click="getDogImage">ワンちゃん</button><br>
         <img v-bind:src="dogImage">
+        <input type="text" v-model="watchTest">
    </div> 
    <script>
+        let obj = {
+            a: 'テスト'
+        }
+        obj.b = 'あああ'
+        obj.c = test // test関数を変数に代入(JSの機能)
+
+        function test(){ 
+            console.log('テスト')
+        }
+
         const url = 'https://dog.ceo/api/breeds/image/random'
         const options = {
             method: 'get'
@@ -21,7 +33,8 @@
             el: '#app',
             data: function(){
                 return {
-                    dogImage: ''
+                    dogImage: '',
+                    watchTest: ''
                 }
             },
             methods: {
@@ -33,8 +46,14 @@
                     this.dogImage = response.message;
                 }
             },
+            watch:{
+                watchTest(){
+                    this.watchDogImage()
+                }
+            },
             created(){
                 this.getDogImage(); // ページを開いた時に関数を走らせる
+                this.watchDogImage = _.debounce(this.getDogImage, 1000)
             }
         })
    </script>

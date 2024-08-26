@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <style>
+        .parent{
+        width: 800px;
+        margin: 0 auto;
+        border: 1px red solid;
+        }
+        .child{
+            width: 30%;
+            margin: 0 auto;
+            border: 1px blue solid;
+        }
+    </style>
+</head>
+<body>
+   <div id="app" >
+        <!-- <my-com class="child">{{ member.name }}</my-com> -->
+         <my-com>
+            <template v-slot:default="player">
+                {{ player }}
+                {{ player.member.name }}
+            </template>
+         </my-com>
+   </div>
+   <script>
+        let myCom = {
+            data: function(){
+                return {
+                    member: {
+                        name: '堂安',
+                        height: 180,
+                        hobby: 'サッカー'
+                    }
+                }
+            },
+            template:
+            `<div>
+                <slot v-bind:member="member">ここが差しかわる</slot>
+            </div>`
+        }
+        let app = new Vue({
+            el: '#app',
+            data: function(){
+                return {
+
+                }
+            },
+            components: {
+                myCom
+            }
+        })
+   </script>
+</body>
+</html>

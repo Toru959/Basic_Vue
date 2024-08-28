@@ -24,38 +24,8 @@
       <v-main>
         <v-container fluid>
           <v-row class="blue-b">
-            <v-col cols="12" sm="6" md="4" class="red-b">
-              <v-btn color="primary" v-on:click="isShow = !isShow">
-                Primary
-              </v-btn>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-card v-show="isShow" class="mx-auto" max-width="344" outlined>
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="text-overline mb-4">
-                    OVERLINE
-                  </div>
-                  <v-list-item-title class="text-h5 mb-1">
-                    Headline 5
-                  </v-list-item-title>
-                  <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-avatar
-                  tile
-                  size="80"
-                  color="grey"
-                ></v-list-item-avatar>
-              </v-list-item>
-
-              <v-card-actions>
-                <v-btn outlined rounded text>
-                  Button
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-            </v-col>
+            <v-col cols="12" sm="6" md="4" class="my-5 red-b">A</v-col>
+            <v-col cols="12" md="4">B</v-col>
             <v-col cols="12" md="4">C</v-col>
           </v-row>
         </v-container>
@@ -74,7 +44,6 @@
       vuetify: new Vuetify(),
       data(){
         return {
-          isShow: false
         }
       }
     })

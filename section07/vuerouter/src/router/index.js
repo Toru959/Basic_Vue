@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import BookList from '../views/BookList.vue'
 import BookDetail from '@/components/BookDetail.vue'
+import ItemList from '../views/ItemList.vue'
 
 Vue.use(VueRouter)
 
@@ -31,10 +32,15 @@ const routes = [
     component: BookDetail,
     // BookListから送られてきた各パラメータを受け取る
     props: route => ({
-      id: route.params.id,
+      id: Number(route.params.id),
       title: route.params.title,
       content: route.params.content
     })
+  },
+  {
+    path: '/item/:id',
+    name: 'Item',
+    component: ItemList,
   }
 ]
 

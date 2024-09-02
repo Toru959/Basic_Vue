@@ -51,6 +51,9 @@ const routes = [
     path: '/item/:id',
     name: 'Item',
     component: ItemList,
+    // beforeEach: (to, from, next) => { //ルート単位のナビゲーションガード
+
+    // }
   },
   { // ネストされたルートの場合nameを書くとエラーがでる
     path: '/user',
@@ -79,6 +82,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => { // グローバルナビゲーションガード
+  console.log(to)
+  console.log(from)
+  next()
 })
 
 export default router

@@ -8,8 +8,9 @@
       <router-link to="/user/profile">User</router-link>
     </nav>
     <div class="blue-b">
-       <router-view/>
+       <router-view />
     </div>
+    <router-view name="sub" />
   </div>
 </template>
 

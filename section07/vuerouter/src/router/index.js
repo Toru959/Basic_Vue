@@ -8,6 +8,7 @@ import NotFound from '@/components/NotFound.vue'
 import UserList from '@/views/UserList.vue'
 import UserProfile from '@/components/UserProfile.vue'
 import UserPost from '@/components/UserPost.vue'
+import HomeSub from '@/components/HomeSub.vue'
 
 
 Vue.use(VueRouter)
@@ -16,7 +17,11 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    components: { // 名前付きview-route
+      default: HomeView, // 名前なし
+      sub: HomeSub // 名前あり
+    }
+
   },
   {
     path: '/about',

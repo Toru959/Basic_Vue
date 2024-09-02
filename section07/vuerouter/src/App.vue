@@ -4,9 +4,12 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/book">BookList</router-link> |
-      <router-link to="/item/1">Item</router-link>
+      <router-link to="/item/1">Item</router-link> |
+      <router-link to="/user/profile">User</router-link>
     </nav>
-    <router-view/>
+    <div class="blue-b">
+       <router-view/>
+    </div>
   </div>
 </template>
 
@@ -30,5 +33,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.blue-b {
+  border: 1px blue solid;
 }
 </style>

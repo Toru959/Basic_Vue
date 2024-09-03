@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>Books</h2>
+        <div v-for="(book, n) in books">
+            <p>
+                <span class="book">{{ book }}</span>
+                <button v-on:click="removeBooks">Remove</button>
+            </p>
+        </div>
+
+        <p>
+            <input v-model="newBooks">
+            <button v-on:click="addBooks">Add Book</button>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <script>
+        const STORAGE_KEY = 'books'
+        let app = new Vue({
+            el: '#app',
+            data: function(){
+                return {
+                    books: [],
+                    newBooks: null
+                }
+            },
+            mounted() {
+                if (localStorage.getItem(STORAGE_KEY)) {
+                try {
+                    this.cats = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                } catch(e) {
+                    localStorage.removeItem(STORAGE_KEY);
+                }
+                }
+            },
+            methods: {
+                addBooks() {
+                // 実際に何かしたことを入力する
+                if (!this.newBooks) {
+                    return;
+                }
+
+                this.books.push(this.newBooks);
+                this.newBooks = '';
+                this.saveBooks();
+                },
+                removeBooks(x) {
+                this.books.splice(x, 1);
+                this.saveBooks();
+                },
+                saveBooks() {
+                const parsed = JSON.stringify(this.books);
+                localStorage.setItem(STORAGE_KEY, parsed);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

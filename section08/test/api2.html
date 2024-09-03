@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="keyword">
+        <button v-on:click="search(keyword)">検索する</button>
+        <ul>
+            <li v-for="book in searchResults" :key="book.title">
+                <h3>{{ book.title }}</h3>
+                <img :src="book.image" alt="Book Image">
+                <p>{{ book.description }}</p>
+            </li>
+        </ul>
+    </div> 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: function(){
+                return {
+                    keyword: '',
+                    searchResults: []
+                }
+            },
+            methods:{
+                async search(keyword){
+                    this.searchResults = []
+                    const baseURL = 'https://api.allorigins.win/raw?url='
+                    const apiURL = 'https://www.googleapis.com/books/v1/volumes?'
+                    const params = {
+                        q: `intitle:${keyword}`,
+                        maxResults: 40
+                    }
+                    const queryParams = new URLSearchParams(params)
+                    const fetchURL = baseURL + encodeURIComponent(apiURL + queryParams)
+                    
+                    try {
+                        const response = await fetch(baseURL + queryParams)
+                        const data = await response.json()
+                        console.log(data.items)
+                        
+                        if (data.items && Array.isArray(data.items)) {
+                            for(let book of data.items){
+                                let title = book.volumeInfo.title || 'No Title'
+                                let img = book.volumeInfo.imageLinks
+                                let description = book.volumeInfo.description || 'No Description'
+                                this.searchResults.push({
+                                    title: title,
+                                    image: img ? img.thumbnail : '',
+                                    description: description.slice(0, 40)
+                                })
+                            }
+                        } else {
+                            console.error('No items found in response')
+                        }
+                    } catch (error) {
+                        console.error('Error fetching data:', error)
+                    }
+                } 
+            } 
+        })
+    </script>
+    
+   
+</body>
+</html>

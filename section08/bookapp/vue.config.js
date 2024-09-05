@@ -6,7 +6,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: 'https://www.googleapis.com',
+        target: 'https://www.googleapis.com/books/v1/volumes',
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
       },

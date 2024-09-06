@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HeaderList/>
+    <HeaderList @delete-local-storage="deleteLocalStorage" />
     <v-main>
       <v-container>
         <router-view @add-book-list="addBook" :books="books" 
@@ -78,6 +78,15 @@ export default {
     },
     goToEditPage(id){
       this.$router.push(`/edit/${id}`)
+    },
+    deleteLocalStorage(){
+      const isDeleted = 'LocalStorageのデータを削除していいですか?'
+      if(window.confirm(isDeleted)){
+        localStorage.setItem(STORAGE_KEY, '')
+        localStorage.removeItem(STORAGE_KEY)
+        this.books = []
+        window.location.reload()
+      }
     }
   }
   

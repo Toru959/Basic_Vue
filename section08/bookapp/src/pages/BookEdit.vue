@@ -40,7 +40,7 @@
                         </v-textarea>
                         <v-card-actions>
                             <v-btn color="secondary" to="/">一覧に戻る</v-btn>
-                            <v-btn color="info">保存する</v-btn>
+                            <v-btn color="info" v-on:click="updateBookInfo">保存する</v-btn>
                         </v-card-actions>
                     </v-col>
                 </v-card>
@@ -59,6 +59,15 @@ export default {
     data(){
         return{
             book: ''
+        }
+    },
+    methods:{
+        updateBookInfo(){
+            this.$emit('update-book-info', {
+                id: this.$route.params.id,
+                readDate: this.date,
+                memo: this.book.memo
+            })
         }
     },
     beforeRouteEnter(to, from, next){

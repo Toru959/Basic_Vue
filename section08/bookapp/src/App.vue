@@ -3,7 +3,8 @@
     <HeaderList/>
     <v-main>
       <v-container>
-        <router-view @add-book-list="addBook" :books="books" />
+        <router-view @add-book-list="addBook" :books="books" 
+        @update-book-info="updateBookInfo" />
       </v-container>
     </v-main>
     <FooterList/>
@@ -60,6 +61,20 @@ export default {
     saveBooks() {
     const parsed = JSON.stringify(this.books)
     localStorage.setItem(STORAGE_KEY, parsed)
+    },
+    updateBookInfo(e){
+      const updateInfo = {
+        id: e.id,
+        readDate: e.readDate,
+        memo: e.memo,
+        title: this.books[e.id].title,
+        image: this.books[e.id].image,
+        description: this.books[e.id].description
+      }
+
+      this.books.splice(e.id, 1, updateInfo)
+      this.saveBooks()
+      This.$router.push('/')
     },
     goToEditPage(id){
       this.$router.push(`/edit/${id}`)

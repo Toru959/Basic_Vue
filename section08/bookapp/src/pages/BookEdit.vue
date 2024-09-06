@@ -54,7 +54,7 @@ export default {
     name: 'BookEdit',
     props:{
         books:Array,
-        date: new Date().toISOString().substr(0, 10),
+        date: '',
     },
     data(){
         return{
@@ -74,6 +74,11 @@ export default {
         next( vm => {
             vm.$nextTick(() => {
                 vm.book = vm.books[vm.$route.params.id]
+                if(vm.book.readDate){
+                    vm.date = vm.book.readDate
+                } else {
+                    vm.date = new Date().toISOString().substr(0, 10)
+                }
                 // console.log(vm.book)
             })
         })

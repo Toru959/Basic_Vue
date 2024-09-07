@@ -35,7 +35,7 @@
             mounted() {
                 if (localStorage.getItem(STORAGE_KEY)) {
                 try {
-                    this.cats = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                    this.books = JSON.parse(localStorage.getItem(STORAGE_KEY));
                 } catch(e) {
                     localStorage.removeItem(STORAGE_KEY);
                 }
@@ -52,8 +52,8 @@
                 this.newBooks = '';
                 this.saveBooks();
                 },
-                removeBooks(x) {
-                this.books.splice(x, 1);
+                removeBooks(n) {
+                this.books.splice(n, 1);
                 this.saveBooks();
                 },
                 saveBooks() {

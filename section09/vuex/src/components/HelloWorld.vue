@@ -1,11 +1,14 @@
 <template>
   <div>
-    <button v-on:click="increment">+</button>
+    <!-- <button v-on:click="increment">+</button> -->
     <button v-on:click="addCount">+10</button>
+    <button v-on:click="incrementAction">+</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -20,11 +23,20 @@ export default {
     //     value: 10
     //   })
     // },
-    increment(){
-      this.$store.dispatch('incrementAction')
-    },
+    ...mapActions(['incrementAction', 'addCountAction']), // 1行で書くことができる ボタンがクリックされたらここが動く
+
+    // increment(){ // 少し冗長？
+    //   this.$store.dispatch('incrementAction')
+    // },
+
+    // addCount(){
+    //   this.$store.dispatch('addCountAction', {
+    //     value: 10
+    //   })
+    // }
+
     addCount(){
-      this.$store.dispatch('addCountAction', {
+      this.addCountAction({
         value: 10
       })
     }

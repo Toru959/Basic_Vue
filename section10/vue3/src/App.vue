@@ -7,7 +7,7 @@
     <router-link to="/composition">Composition</router-link> |
     <router-link to="/propsEmit">PropsEmit</router-link> 
   </nav>
-  <router-view :setupBooks="setupBooks" :dataBooks="dataBooks"/> <!-- 子コンポーネントに値を渡す -->
+  <router-view :setupBooks="setupBooks" :dataBooks="dataBooks" @custom-event="parentMethod"/> <!-- 子コンポーネントに値を渡す -->
 </template>
 
 <script>
@@ -42,6 +42,11 @@ export default {
           author: 'data著者2'
         }
       ]
+    }
+  },
+  methods:{
+    parentMethod(e){
+      console.log(e)
     }
   },
   provide(){

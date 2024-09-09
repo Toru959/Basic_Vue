@@ -10,10 +10,12 @@
     <p>reactive: {{ book.author[0] }}</p>
     <p>reactivetoRefs: {{ titleRef }}</p>
     <p>reactivetoRefs: {{ authorRef[1] }}</p>
+    <button v-on:click="btnClick">ボタン</button>
+    <p>computed: {{ totalPrice }}</p>
 </template>
 
 <script>
-import { ref, reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs, computed } from 'vue'
 
 export default {
     
@@ -34,6 +36,20 @@ export default {
             authorRef: ['大谷2', '藤波2'] 
         })
 
+        const btnClick = (e) => { // setup関数内ではjavascriptと同じように書ける
+            console.log(book.title) // setup関数内ではthisは使えないので、不要
+            console.log(e)
+        }
+
+        const item = reactive({
+            price: 100,
+            number: 1
+        })
+
+        const totalPrice = computed(() => {
+            return item.price * item.number // computedは必ずreturnが必要
+        })
+
         // console.log('setup') // createdより早い
         // console.log(this)
         console.log(nameRef)
@@ -44,7 +60,10 @@ export default {
             age,
             nameRef,
             book,
-            ...toRefs(booktoRefs) // spread構文 reactiveじゃないので編集はできないのでtoRefs()で囲うことでreactiveになる
+            ...toRefs(booktoRefs), // spread構文 reactiveじゃないので編集はできないのでtoRefs()で囲うことでreactiveになる
+            btnClick,
+            item,
+            totalPrice
         } 
     },
     data(){

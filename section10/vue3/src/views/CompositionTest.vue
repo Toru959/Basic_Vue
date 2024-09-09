@@ -8,10 +8,12 @@
     <p>reactive: {{ book }}</p>
     <p>reactive: {{ book.title }}</p>
     <p>reactive: {{ book.author[0] }}</p>
+    <p>reactivetoRefs: {{ titleRef }}</p>
+    <p>reactivetoRefs: {{ authorRef[1] }}</p>
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 
 export default {
     
@@ -27,6 +29,11 @@ export default {
             author: ['大谷', '藤波'] 
         })
 
+        const booktoRefs = reactive({ 
+            titleRef: 'タイトル2',
+            authorRef: ['大谷2', '藤波2'] 
+        })
+
         // console.log('setup') // createdより早い
         // console.log(this)
         console.log(nameRef)
@@ -36,7 +43,8 @@ export default {
             name, 
             age,
             nameRef,
-            book
+            book,
+            ...toRefs(booktoRefs) // spread構文 reactiveじゃないので編集はできないのでtoRefs()で囲うことでreactiveになる
         } 
     },
     data(){

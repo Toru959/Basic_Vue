@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div>コンポジションAPI</div>
     <p>{{ name }}</p>
     <p>{{ age }}</p>
@@ -12,10 +13,13 @@
     <p>reactivetoRefs: {{ authorRef[1] }}</p>
     <button v-on:click="btnClick">ボタン</button>
     <p>computed: {{ totalPrice }}</p>
+    <p>watch: <input v-model="search">{{ search }}</p>
+    <div>watchEffect: <input v-model="searchEffect">{{ searchEffect }}</div>
+    </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed } from 'vue'
+import { ref, reactive, toRefs, computed, watch, watchEffect } from 'vue'
 
 export default {
     
@@ -50,6 +54,19 @@ export default {
             return item.price * item.number // computedは必ずreturnが必要
         })
 
+        const search = ref('') // searchはrefなのでリアクティブな変数
+        watch(search, (newValue, prevValue) => { // 第一引数で監視したい対象
+            console.log(`watch: ${search.value}`) // テンプレート構文
+            console.log(`new: ${newValue}`)
+            console.log(`prev: ${prevValue}`)
+        })
+
+        const searchEffect = ref('')
+        watchEffect(() => { // watchよりも簡単に扱える
+            console.log(`watchEffect: ${searchEffect.value}`)
+        })
+            
+
         // console.log('setup') // createdより早い
         // console.log(this)
         console.log(nameRef)
@@ -63,7 +80,9 @@ export default {
             ...toRefs(booktoRefs), // spread構文 reactiveじゃないので編集はできないのでtoRefs()で囲うことでreactiveになる
             btnClick,
             item,
-            totalPrice
+            totalPrice,
+            search,
+            searchEffect
         } 
     },
     data(){

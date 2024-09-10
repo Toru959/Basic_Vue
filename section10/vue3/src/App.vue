@@ -6,7 +6,9 @@
     <router-link to="/teleport">Teleport</router-link> |
     <router-link to="/composition">Composition</router-link> |
     <router-link to="/propsEmit">PropsEmit</router-link> |
-    <router-link to="/function">Function</router-link> 
+    <router-link to="/function">Function</router-link> |
+    <router-link to="/router">Router</router-link> | 
+    <router-link to="/vuex">Vuex</router-link> 
   </nav>
   <router-view :setupBooks="setupBooks" :dataBooks="dataBooks" @custom-event="parentMethod"/> <!-- 子コンポーネントに値を渡す -->
 </template>

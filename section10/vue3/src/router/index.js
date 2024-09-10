@@ -6,6 +6,7 @@ import CompositionTest from '../views/CompositionTest.vue'
 import PropsEmit from '../views/PropsEmit.vue'
 import FunctionTest from '../views/FunctionTest.vue'
 import RouterTest from '../views/RouterTest.vue'
+import VuexTest from '../views/VuexTest.vue'
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/router',
     name: 'router',
     component: RouterTest
+  },
+  {
+    path: '/vuex',
+    name: 'vuex',
+    component: VuexTest
   }
 ]
 

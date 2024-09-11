@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/logo.png"><br>
+    <ScriptSetup title="ここにタイトルが入ります"/>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <ScriptSetup />
   </div>
 </template>
 
